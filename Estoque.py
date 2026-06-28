@@ -16,12 +16,6 @@ def add(n, p, q, hist=[]):
     print("Produto adicionado!")
 
 
-#   QUITAÇÃO DA FUNÇÃO DE VENDA
-
-# Dívida técnica quitada: redução do aninhamento de condições por meio de guard clauses.
-# Dívida técnica quitada: eliminação da duplicação da regra de cálculo do total,
-# centralizando a lógica na função calcular_total().
-
 def vender_produtos(nome, quantidade):
 
     for produto in produtos:
@@ -46,9 +40,6 @@ def vender_produtos(nome, quantidade):
     return 0
 
 
-# Dívida técnica quitada: centralização da regra de cálculo do total da venda,
-# evitando duplicação e inconsistências.
-
 # calcula o valor total de uma compra
 def calcular_total(preco, quantidade):
 
@@ -62,33 +53,6 @@ def calcular_total(preco, quantidade):
         total -= total * porcentagem_desconto
 
     return total
-
-# ANTERIOR À QUITAÇÃO
-
-
-"""def vender(nome, quantidade):
-    for i in range(len(produtos)):
-        if produtos[i]["nome"] == nome:
-            if produtos[i]["qtd"] >= quantidade:
-                produtos[i]["qtd"] = produtos[i]["qtd"] - quantidade
-                total = produtos[i]["preco"] * quantidade
-                # desconto pra compras grandes
-                if total > 100:
-                    total = total - total * 0.1
-                print("Venda realizada. Total: " + str(total))
-                return total
-            else:
-                print("Estoque insuficiente")
-                return 0
-                
-                
-# calcula o total de uma compra (usado no relatorio)
-def calcular_total(preco, quantidade):
-    t = preco * quantidade
-    if t > 200:                 # limite diferente do usado em vender()
-        t = t - t * 0.15        # desconto diferente do usado em vender()
-    return t
-"""
 
 
 def listar():
@@ -118,8 +82,6 @@ def relatorio_vendas():
     pass
 
 
-# QUITAÇÃO DE VALIDAÇÃO DOS DADOS DE ENTRADA
-
 # Valida o preço informado, garantindo que seja um número positivo
 def ler_preco(mensagem):
     while True:
@@ -132,9 +94,8 @@ def ler_preco(mensagem):
         except ValueError:
             print("Digite apenas números para o preço.")
 
+
 # Valida a quantidade informada, garantindo que seja um número inteiro positivo
-
-
 def ler_quantidade(mensagem):
     while True:
         try:
@@ -146,9 +107,8 @@ def ler_quantidade(mensagem):
         except ValueError:
             print("Digite apenas números inteiros para a quantidade.")
 
+
 # Valida textos, garantindo que a entrada não seja vazia
-
-
 def ler_texto(mensagem):
     while True:
         texto = input(mensagem).strip()
@@ -156,9 +116,8 @@ def ler_texto(mensagem):
             return texto
         print("O texto não pode estar vazio.")
 
+
 # valida a opção escolhida pelo o usuário
-
-
 def ler_opcao_menu():
     while True:
         opcao = input("Opcao: ").strip()
@@ -166,10 +125,6 @@ def ler_opcao_menu():
             return opcao
         print("Opção inválida. Digite um valor entre 0 e 5.")
 
-
-# Dívida técnica quitada: validação dos dados de entrada.
-# Refatoração: extração da lógica de validação para funções específicas,
-# tornando a função menu() mais legível e com responsabilidade focada no fluxo da aplicação.
 
 def menu():
 
@@ -190,7 +145,7 @@ def menu():
             nome_produto = ler_texto("Nome do produto: ")
             quantidade_produto = ler_quantidade("Quantidade: ")
 
-            vender(nome_produto, quantidade_produto)
+            vender_produtos(nome_produto, quantidade_produto)
 
         elif opcao_menu == "3":
             listar()
@@ -209,36 +164,5 @@ def menu():
         elif opcao_menu == "0":
             break
 
-# ANTERIOR A REFATORAÇÃO
-
-
-"""def menu():
-    while True:
-        print("\n1-Cadastrar  2-Vender  3-Listar  4-Estoque baixo  5-Admin  0-Sair")
-        op = input("Opcao: ")
-        if op == "1":
-            n = input("Nome: ")
-            p = float(input("Preco: "))
-            q = int(input("Qtd: "))
-            add(n, p, q)
-        elif op == "2":
-            n = input("Nome do produto: ")
-            q = int(input("Quantidade: "))
-            vender(n, q)
-        elif op == "3":
-            listar()
-        elif op == "4":
-            relatorio_estoque_baixo()
-        elif op == "5":
-            s = input("Senha: ")
-            if s == SENHA_ADMIN:
-                print("Acesso liberado")
-            else:
-                print("Senha errada")
-        elif op == "0":
-            break
-        else:
-            print("Opcao invalida")
-"""
 
 menu()
